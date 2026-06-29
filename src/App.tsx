@@ -5,7 +5,8 @@ import {getFilteredTasks} from "./utils.ts";
 import {v1} from 'uuid'
 import {TaskType} from "./types.ts";
 
-export type FilterValuesType = "all"| "active"| "completed"
+export type FilterValuesType = "all" | "active" | "completed"
+
 function App() {
     const storageForCountCreatedTasks = useRef<number>(3)
     //Data
@@ -30,6 +31,10 @@ function App() {
         storageForCountCreatedTasks.current += 1
     }
 
+    const changeTaskStatus = (tasksId: TaskType["id"], isDone: TaskType["isDone"]) => {
+        const nextStateOfData: TaskType[] = tasks.map(t => t.id === tasksId ? {...t, isDone } :t)
+        setTasks(nextStateOfData)
+    }
 
 
     const [filter, setFilter] = useState<FilterValuesType>("all")
@@ -42,10 +47,12 @@ function App() {
             <Todolist
                 totalTaskCount={storageForCountCreatedTasks.current}
                 title={todolistTitle}
+                filter={filter}
                 tasks={getFilteredTasks(tasks, filter)}
                 deleteTask={deleteTask}
                 changeTodolistFilter={changeTodolistFilter}
                 createTask={createTask}
+                changeTaskStatus={changeTaskStatus}
             />
         </div>
 

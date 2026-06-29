@@ -6,3 +6,25 @@
 .app > div {
   margin-right: 50px;
 }
+
+.task {
+  font-weight: bold;
+}
+
+.task-done {
+  text-decoration: line-through;
+  font-style: italic;
+  opacity: 0.5;
+}
+
+.filter__btn-active {
+  background-color: darkcyan;
+  color: white;
+  border-radius: 3px;
+  border: 2px solid darkcyan;
+}
+
+.error {
+  border: 2px solid red;
+  outline: none;
+}
